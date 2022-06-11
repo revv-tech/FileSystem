@@ -48,6 +48,12 @@ public class Segmento {
     
     
     
+    /*
+    Pasar a JSON
+    */
+    public void toJson(){
+        
+    }
     
     
     

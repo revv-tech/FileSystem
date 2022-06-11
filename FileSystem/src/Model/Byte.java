@@ -34,5 +34,12 @@ public class Byte {
         this.caracter = caracter;
     }
     
+    /*
+    Pasar a JSON
+    */
+    public void toJson(){
+        
+    }
+    
     
 }

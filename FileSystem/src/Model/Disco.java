@@ -6,10 +6,7 @@ package Model;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Marco
- */
+
 public class Disco {
     
     private ArrayList<Segmento> segmentos;
@@ -24,6 +21,16 @@ public class Disco {
 
     public void setSegmentos(ArrayList<Segmento> segmentos) {
         this.segmentos = segmentos;
+    }
+    
+    
+    /*
+    Pasar a JSON
+    */
+    public void toJson(){
+        String nameJson = "disco.json";
+        
+        
     }
     
 }
