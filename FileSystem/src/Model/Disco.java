@@ -24,6 +24,28 @@ public class Disco {
         this.setSegmentList();
         
     }
+    
+    // Elimina los contenidos del disco de acuerdo al id de un Archivo
+    
+    public void removeArchivo(int idArchivo){
+        
+    }
+    
+    // Agrega los contenidos del disco de acuerdo al id de un nuevo Archivo
+    
+    public void addArchivo(String contenido,int idArchivo){
+        
+    }
+    
+    // Chequea si el disco esta lleno
+    public void checkMemoriaDisco(){
+        
+    }
+    
+    // Modificar los contenidos de un archivo en el disco de acuerdo a un id de archivo
+    
+    public void modifyArchivo(String contenido, int idArchivo){}
+    
     // Settea los segmentos en default
     public void setSegmentList() {
         for (int i = 0 ; i < this.tamaho ; i++){
