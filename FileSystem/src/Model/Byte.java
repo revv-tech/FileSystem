@@ -33,6 +33,11 @@ public class Byte {
     public void setCaracter(String caracter) {
         this.caracter = caracter;
     }
+    // Resetea los valores
+    public void resetByte(){
+        this.idArchivo = 0;
+        this.caracter = "-";
+    }
     
     
     

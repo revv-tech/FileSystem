@@ -28,23 +28,91 @@ public class Disco {
     // Elimina los contenidos del disco de acuerdo al id de un Archivo
     
     public void removeArchivo(int idArchivo){
-        
+        for (int i = 0 ; i < this.tamaho ; i++) {   
+            for (int j = 0 ; j < this.tamanhoSegmento ; j++){
+                Byte tmp = this.segmentos.get(i).getBytes().get(j);
+                if (tmp.getIdArchivo() == idArchivo){
+                    tmp.resetByte();
+                }    
+            }
+        }
     }
     
     // Agrega los contenidos del disco de acuerdo al id de un nuevo Archivo
     
     public void addArchivo(String contenido,int idArchivo){
         
+        int contenidoLength = contenido.length();
+        int counter = 0;
+        
+        if (!checkMemoriaDisco(contenido)){
+            System.out.println("No hay espacio para agregar el archivo");
+            return;
+        }
+        else{
+            for (int i = 0 ; i < this.tamaho ; i++) {
+                
+                for (int j = 0 ; j < this.tamanhoSegmento ; j++){
+                   
+                   if (!contenido.isBlank()){
+                       Byte tmp = this.segmentos.get(i).getBytes().get(j);
+                       String firstLetter = contenido.substring(0, 1);
+                       
+                       if (tmp.getCaracter().equals("-") & tmp.getIdArchivo() == 0){
+                           tmp.setCaracter(firstLetter);
+                           tmp.setIdArchivo(idArchivo);
+                           contenido = contenido.substring(1);
+                       }
+                   }
+                }
+            }
+            System.out.println("Archivo agregado");
+        }
     }
     
     // Chequea si el disco esta lleno
-    public void checkMemoriaDisco(){
-        
+    public boolean checkMemoriaDisco(String contenido){
+        int contenidoLength = contenido.length();
+        for (int i = 0 ; i < this.tamaho ; i++) {
+            for (int j = 0 ; j < this.tamanhoSegmento ; j++){
+                if (this.segmentos.get(i).getBytes().get(j).getCaracter().equals("-")){
+                    contenidoLength = contenidoLength - 1;
+                }
+                if (contenidoLength == 0)
+                    return true;
+            }
+        }
+        return false;
+    }
+    
+    // Chequea si el disco esta lleno
+    public boolean checkMemoriaDiscoModify(String contenido, int idArchivo){
+        int contenidoLength = contenido.length();
+        for (int i = 0 ; i < this.tamaho ; i++) {
+            for (int j = 0 ; j < this.tamanhoSegmento ; j++){
+                if (this.segmentos.get(i).getBytes().get(j).getCaracter().equals("-") & this.segmentos.get(i).getBytes().get(j).getIdArchivo() == idArchivo){
+                    contenidoLength = contenidoLength - 1;
+                }
+                if (contenidoLength == 0)
+                    return true;
+            }
+        }
+        return false;
     }
     
     // Modificar los contenidos de un archivo en el disco de acuerdo a un id de archivo
-    
-    public void modifyArchivo(String contenido, int idArchivo){}
+    public void modifyArchivo(String contenido, int idArchivo){
+        if (!checkMemoriaDiscoModify(contenido,idArchivo)){
+            System.out.println("No hay espacio para modificar el archivo con el nuevo contenido debido a que no hay memoria");
+            return;
+        }else {
+            // Elimina el archivo
+            this.removeArchivo(idArchivo);
+            // Agrega el nuevo contenido
+            this.addArchivo(contenido, idArchivo);
+        }
+        
+    }
     
     // Settea los segmentos en default
     public void setSegmentList() {

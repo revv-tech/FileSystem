@@ -26,10 +26,16 @@ public class Main {
         
         
         
-       Disco disk = new Disco(10,10);
-       disk.toJson();
+      Disco disk = new Disco(10,10);
+      for (int i = 0; i < 5; i++){
+          disk.addArchivo("Marco", 1);
+      }
+      disk.addArchivo("Felipe", 2);
+      disk.addArchivo("Yepeto", 3);
+      disk.addArchivo("Federico", 4);
+      disk.removeArchivo(2);
       
-       
+      disk.toJson();
     }
     
 }
