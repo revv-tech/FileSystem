@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Marco
@@ -12,24 +14,32 @@ public class Directorio {
     
     int idDirectorio;
     String nombre;
-
+    ArrayList<Archivo> archivos;
+    
+    public Directorio(){
+        this.archivos = new ArrayList<Archivo>();
+    };
     public Directorio(int idDirectorio, String nombre) {
         this.idDirectorio = idDirectorio;
         this.nombre = nombre;
+        this.archivos = new ArrayList<Archivo>();
     }
-
+    public Directorio copy(String nombre, int idDirectorio){
+        Directorio newDir = new Directorio();
+        newDir.archivos = this.archivos;
+        newDir.nombre = nombre;
+        newDir.idDirectorio = idDirectorio;
+        return newDir;
+    }
     public int getIdDirectorio() {
         return idDirectorio;
     }
-
     public void setIdDirectorio(int idDirectorio) {
         this.idDirectorio = idDirectorio;
     }
-
     public String getNombre() {
         return nombre;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
