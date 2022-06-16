@@ -29,15 +29,19 @@ public class Disco {
     
     // Elimina los contenidos del disco de acuerdo al id de un Archivo
     
-    public void removeArchivo(int idArchivo){
+    public boolean removeArchivo(int idArchivo){
         for (int i = 0 ; i < this.tamaho ; i++) {   
             for (int j = 0 ; j < this.tamanhoSegmento ; j++){
                 Byte tmp = this.segmentos.get(i).getBytes().get(j);
                 if (tmp.getIdArchivo() == idArchivo){
                     tmp.resetByte();
+                    System.out.println("Eliminado");
+                    return true;
                 }    
             }
         }
+        System.out.println("No eliminado");
+        return false;
     }
     
     // Agrega los contenidos del disco de acuerdo al id de un nuevo Archivo
@@ -104,15 +108,16 @@ public class Disco {
     }
     
     // Modificar los contenidos de un archivo en el disco de acuerdo a un id de archivo
-    public void modifyArchivo(String contenido, int idArchivo){
+    public boolean modifyArchivo(String contenido, int idArchivo){
         if (!checkMemoriaDiscoModify(contenido,idArchivo)){
             System.out.println("No hay espacio para modificar el archivo con el nuevo contenido debido a que no hay memoria");
-            return;
+            return false;
         }else {
             // Elimina el archivo
             this.removeArchivo(idArchivo);
             // Agrega el nuevo contenido
             this.addArchivo(contenido, idArchivo);
+            return true;
         }
         
     }

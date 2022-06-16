@@ -12,30 +12,50 @@ import java.util.ArrayList;
  */
 public class Directorio {
     
+    int idDirectorioPadre;
     int idDirectorio;
     String nombre;
     ArrayList<Archivo> archivos;
-    ArrayList<Directorio> directorios;
+ 
+    public Directorio(){};
     
-    public Directorio(){
-        this.archivos = new ArrayList<Archivo>();
-        this.directorios = new ArrayList<Directorio>();
-    };
-    public Directorio(int idDirectorio, String nombre) {
+    public Directorio(int idDirectorioPadre, int idDirectorio, String nombre) {
+        this.idDirectorioPadre = idDirectorioPadre;
         this.idDirectorio = idDirectorio;
         this.nombre = nombre;
         this.archivos = new ArrayList<Archivo>();
-        this.directorios = new ArrayList<Directorio>();
     }
     public Directorio copy(String nombre, int idDirectorio){
         Directorio newDir = new Directorio();
-        newDir.archivos = this.archivos;
         newDir.nombre = nombre;
         newDir.idDirectorio = idDirectorio;
         return newDir;
     }
+    public Archivo buscarArchivoXId(int idArchivo){
+        for (int i = 0 ; i < this.archivos.size() ; i++){
+            if (this.archivos.get(i).getIdArchivo() == idArchivo)
+                return archivos.get(i);
+        }
+        System.out.println("El archivo no existe");
+        return null;
+    }
+    public void agregarArchivo(Archivo newArch){
+        this.archivos.add(newArch);
+    }
     public int getIdDirectorio() {
         return idDirectorio;
+    }
+    public int getIdDirectorioPadre() {
+        return idDirectorioPadre;
+    }
+    public void setIdDirectorioPadre(int idDirectorioPadre) {
+        this.idDirectorioPadre = idDirectorioPadre;
+    }
+    public ArrayList<Archivo> getArchivos() {
+        return archivos;
+    }
+    public void setArchivos(ArrayList<Archivo> archivos) {
+        this.archivos = archivos;
     }
     public void setIdDirectorio(int idDirectorio) {
         this.idDirectorio = idDirectorio;

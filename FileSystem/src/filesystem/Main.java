@@ -24,13 +24,13 @@ public class Main {
       
       Disco disk = new Disco(10,10);
       
-      for (int i = 0; i < 20; i++){
+      for (int i = 0; i < 1; i++){
           disk.addArchivo("Marco", 1);
       }
       disk.addArchivo("Felipe", 2);
       disk.addArchivo("Yepeto", 3);
       disk.addArchivo("Federico", 4);
-      disk.removeArchivo(2);
+      disk.modifyArchivo("Federico Vilchez", 2);
     
       
       disk.toJson();

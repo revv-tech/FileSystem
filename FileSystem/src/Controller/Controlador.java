@@ -7,7 +7,9 @@ package Controller;
 import Model.Archivo;
 import Model.Directorio;
 import Model.Disco;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -20,25 +22,133 @@ public class Controlador {
     public static int idArchivo = 0;
     public static int idDirectorio = 0;
     
+    // Manejo de directorios y archivos
+    public ArrayList<Directorio> directorios;
+    public ArrayList<Archivo> archivos;
+    
     public void Controlador(){};
     
     // Inicia programa, crea el disco de acuerdo a los tamaños dados y crea el primer directorio
     public void crearDisco(int tamaho, int tamahoSegmento){
         this.disco = new Disco(tamaho, tamahoSegmento);
-        this.principal = new Directorio(idDirectorio, "principal");
+        this.principal = new Directorio(0, idDirectorio, "principal");
         this.idDirectorio = this.idDirectorio + 1;
+        this.directorios = new ArrayList<Directorio>();
+        this.directorios.add(principal); // Agrega el principal a lista de dirs
+        this.archivos = new ArrayList<Archivo>();
     }
     
+    // Busca directorio, si es nulo es que no existe
+    public Directorio buscarDirectorioXId(int idDirectorio){
+        for (int i = 0 ; i < this.directorios.size(); i++){
+            Directorio tmp = this.directorios.get(i);
+            if (tmp.getIdDirectorio() == idDirectorio){
+                return tmp;
+            }  
+        }
+        return null;
+    }
+    
+    // Crea archivo
     public void crearArchivo(String nombre, String extension, String contenido, int idDirectorio){
         // Primero crea el archivo en el disco y verifica si hay campo. Si hay campo devuelve true y lo agrega
         if (this.disco.addArchivo(contenido, idArchivo)){
             Date fechaCreacion = new Date();
             Archivo newArch = new Archivo(idArchivo, idDirectorio, extension, fechaCreacion, contenido); // Crea la estructura archivo
-            
-            
-            
+            Directorio padre = buscarDirectorioXId(idDirectorio); // Buscamos el directorio padre
+            padre.agregarArchivo(newArch); // Agrega nuevo archivo
+            this.idArchivo = this.idArchivo + 1;
+            System.out.println("Se agrego el archivo al directorio y al disco con exito");
         }
+        System.out.println("No se agrego el archivo al directorio y al disco");
     }
+    // Crea directorio
+    public void crearDirectorio(String nombre, int idDirectorioPadre){
+        // Validacion de que no se repita nombre en el directorio padre
+        Directorio newDir = new Directorio(idDirectorioPadre, idDirectorio, nombre); // Crea nuevo dir
+        this.idDirectorio = this.idDirectorio + 1; // Aumenta id
+        this.directorios.add(newDir); // Agregamos el nuevo directorio a la lista de dirs
+    
+    }
+    
+    // Lista de elementos en el directorio. Retorna una lista con los archivos y los directorios
+    public List[] listaDirActual(int idDirectorio){
+        Directorio actual = this.buscarDirectorioXId(idDirectorio);
+        ArrayList<Directorio> actualDirs = new ArrayList<Directorio>();
+        for (int i = 0 ; i < this.directorios.size() ; i++){
+            if (this.directorios.get(i).getIdDirectorioPadre() == idDirectorio) // Verifica si es el padre o no
+                actualDirs.add(this.directorios.get(i));
+        }
+        return new List[] { actual.getArchivos(), actualDirs };
+    }
+    
+    // Modificar archivos. Si es verdadero es que se modifico el archivo con exito
+    public boolean modFile(int idDirectorio, int idArchivo, String contenido) {
+        
+        // Verifica si se puede modificar el archivo en el disco, y si se puede lo hace y retorna true.
+        if (disco.modifyArchivo(contenido, idArchivo)){
+            // Modifica el contenido
+            this.buscarDirectorioXId(idDirectorio).buscarArchivoXId(idArchivo).modificar(contenido);
+            System.out.println("Se cambio el contenido con exito");
+            return true;
+        }
+        System.out.println("Hubo error al cambiar el contenido");
+        return false;
+    }
+    
+    // Ver propiedades de archivo
+    public String verPropiedades(int idDirectorio,int idArchivo){
+        // String con las propiedades del archivo
+        return this.buscarDirectorioXId(idDirectorio).buscarArchivoXId(idArchivo).verPropiedades();
+    }
+    
+    // Ver contenido del archivo
+    public String verFile(int idDirectorio,int idArchivo){
+        // String con el contenido del archivo
+        return this.buscarDirectorioXId(idDirectorio).buscarArchivoXId(idArchivo).getContenido();
+    }
+    
+    // Mover Archivo
+    public void moverFile(int idDirectorioPadre,int idArchivo, int newDirectorioPadre){
+        Directorio dirPadre = this.buscarDirectorioXId(idDirectorioPadre);
+        // Igualamos archivo a mover
+        Archivo arch = this.buscarDirectorioXId(idDirectorioPadre).buscarArchivoXId(idArchivo);
+        arch.setIdDirectorio(newDirectorioPadre);
+        // Agrega archivo a nuevo directorio
+        this.buscarDirectorioXId(newDirectorioPadre).agregarArchivo(arch);
+        // Elimina el archvio del directorio actual
+        dirPadre.getArchivos().remove(arch);
+    }
+    
+    // Mover Archivo
+    public void moverDir(int idDirectorioPadre,int idDirectorioAMover, int newDirectorioPadre){
+        // Dir padre
+        Directorio dirPadre = this.buscarDirectorioXId(idDirectorioPadre);
+        // Igualamos dir a mover
+        Directorio dirMov = this.buscarDirectorioXId(idDirectorioAMover);
+        // Iguala directorio padre a nuevo padre
+        dirMov.setIdDirectorio(newDirectorioPadre);
+    }
+    
+    // Remover Archivo
+    public void removerArch(int idDirectorio,int idArchivo){
+        // Remueve del disco
+        if (disco.removeArchivo(idArchivo)){
+            Directorio dirPadre = this.buscarDirectorioXId(idDirectorio);
+            ArrayList<Archivo> archivosDir =  dirPadre.getArchivos();
+            for (int i = 0; i < archivosDir.size(); i++ ){
+                
+                if (archivosDir.get(i).getIdArchivo() == idArchivo){
+                    archivosDir.remove(i);
+                    System.out.println("Archivo eliminado");
+                }
+                
+            }
+        }
+        
+    }
+    
+   
     
     
     
