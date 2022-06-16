@@ -56,15 +56,4 @@ public class Segmento {
     public void eliminarArchivo(int idArchivo){
     
     }
-    
-    /*
-    Pasar a JSON
-    */
-    public void toJson(){
-        
-    }
-    
-    
-    
-    
 }

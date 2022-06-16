@@ -15,14 +15,17 @@ public class Directorio {
     int idDirectorio;
     String nombre;
     ArrayList<Archivo> archivos;
+    ArrayList<Directorio> directorios;
     
     public Directorio(){
         this.archivos = new ArrayList<Archivo>();
+        this.directorios = new ArrayList<Directorio>();
     };
     public Directorio(int idDirectorio, String nombre) {
         this.idDirectorio = idDirectorio;
         this.nombre = nombre;
         this.archivos = new ArrayList<Archivo>();
+        this.directorios = new ArrayList<Directorio>();
     }
     public Directorio copy(String nombre, int idDirectorio){
         Directorio newDir = new Directorio();

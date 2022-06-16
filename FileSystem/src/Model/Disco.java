@@ -15,7 +15,8 @@ public class Disco {
     private ArrayList<Segmento> segmentos;
     private int tamaho;
     private int tamanhoSegmento;
-    
+
+
     public Disco(int tamaho, int tamanhoSegmento) {
         
         this.tamaho = tamaho;
@@ -24,6 +25,7 @@ public class Disco {
         this.setSegmentList();
         
     }
+    
     
     // Elimina los contenidos del disco de acuerdo al id de un Archivo
     
@@ -40,14 +42,14 @@ public class Disco {
     
     // Agrega los contenidos del disco de acuerdo al id de un nuevo Archivo
     
-    public void addArchivo(String contenido,int idArchivo){
+    public boolean addArchivo(String contenido,int idArchivo){
         
         int contenidoLength = contenido.length();
         int counter = 0;
         
         if (!checkMemoriaDisco(contenido)){
             System.out.println("No hay espacio para agregar el archivo");
-            return;
+            return false;
         }
         else{
             for (int i = 0 ; i < this.tamaho ; i++) {
@@ -67,6 +69,7 @@ public class Disco {
                 }
             }
             System.out.println("Archivo agregado");
+            return true;
         }
     }
     
