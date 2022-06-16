@@ -35,13 +35,12 @@ public class Disco {
                 Byte tmp = this.segmentos.get(i).getBytes().get(j);
                 if (tmp.getIdArchivo() == idArchivo){
                     tmp.resetByte();
-                    System.out.println("Eliminado");
-                    return true;
-                }    
+                       
+                } 
             }
         }
-        System.out.println("No eliminado");
-        return false;
+        System.out.println("Eliminado");
+        return true;
     }
     
     // Agrega los contenidos del disco de acuerdo al id de un nuevo Archivo
@@ -94,10 +93,13 @@ public class Disco {
     
     // Chequea si el disco esta lleno
     public boolean checkMemoriaDiscoModify(String contenido, int idArchivo){
+        
         int contenidoLength = contenido.length();
         for (int i = 0 ; i < this.tamaho ; i++) {
             for (int j = 0 ; j < this.tamanhoSegmento ; j++){
-                if (this.segmentos.get(i).getBytes().get(j).getCaracter().equals("-") & this.segmentos.get(i).getBytes().get(j).getIdArchivo() == idArchivo){
+                
+                if (this.segmentos.get(i).getBytes().get(j).getCaracter().equals("-") || this.segmentos.get(i).getBytes().get(j).getIdArchivo() == idArchivo){
+                    System.out.println(this.segmentos.get(i).getBytes().get(j).getIdArchivo());
                     contenidoLength = contenidoLength - 1;
                 }
                 if (contenidoLength == 0)
@@ -117,6 +119,7 @@ public class Disco {
             this.removeArchivo(idArchivo);
             // Agrega el nuevo contenido
             this.addArchivo(contenido, idArchivo);
+            System.out.println("Archivo modificado");
             return true;
         }
         

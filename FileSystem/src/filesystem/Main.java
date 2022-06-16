@@ -29,7 +29,7 @@ public class Main {
       }
       disk.addArchivo("Felipe", 2);
       disk.addArchivo("Yepeto", 3);
-      disk.addArchivo("Federico", 4);
+      disk.addArchivo("Mario", 4);
       disk.modifyArchivo("Federico Vilchez", 2);
     
       

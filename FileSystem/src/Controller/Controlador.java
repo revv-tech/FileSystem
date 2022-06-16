@@ -137,7 +137,6 @@ public class Controlador {
             Directorio dirPadre = this.buscarDirectorioXId(idDirectorio);
             ArrayList<Archivo> archivosDir =  dirPadre.getArchivos();
             for (int i = 0; i < archivosDir.size(); i++ ){
-                
                 if (archivosDir.get(i).getIdArchivo() == idArchivo){
                     archivosDir.remove(i);
                     System.out.println("Archivo eliminado");
