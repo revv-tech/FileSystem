@@ -34,12 +34,11 @@ public class Disco {
             for (int j = 0 ; j < this.tamanhoSegmento ; j++){
                 Byte tmp = this.segmentos.get(i).getBytes().get(j);
                 if (tmp.getIdArchivo() == idArchivo){
-                    tmp.resetByte();
-                       
+                    tmp.resetByte();   
                 } 
             }
         }
-        System.out.println("Eliminado");
+        System.out.println("Eliminado de disco");
         return true;
     }
     
@@ -99,7 +98,7 @@ public class Disco {
             for (int j = 0 ; j < this.tamanhoSegmento ; j++){
                 
                 if (this.segmentos.get(i).getBytes().get(j).getCaracter().equals("-") || this.segmentos.get(i).getBytes().get(j).getIdArchivo() == idArchivo){
-                    System.out.println(this.segmentos.get(i).getBytes().get(j).getIdArchivo());
+                    
                     contenidoLength = contenidoLength - 1;
                 }
                 if (contenidoLength == 0)

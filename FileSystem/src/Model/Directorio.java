@@ -32,12 +32,26 @@ public class Directorio {
         return newDir;
     }
     public Archivo buscarArchivoXId(int idArchivo){
+        System.out.println(idArchivo);
         for (int i = 0 ; i < this.archivos.size() ; i++){
             if (this.archivos.get(i).getIdArchivo() == idArchivo)
                 return archivos.get(i);
         }
         System.out.println("El archivo no existe");
         return null;
+    }
+    
+    public String imprimir(){
+        String msg = "----------------------------------------\nidDirectorio: " + idDirectorio + 
+                "\nidDirectorioPadre: " + idDirectorioPadre + 
+                "\nNombre: " + nombre +
+                "\n----- Archivos del Directorio: -----\n";
+        for (int i = 0 ; i < this.archivos.size() ; i++){
+            msg = msg + this.archivos.get(i).verPropiedades();
+        }
+        return msg;
+        
+        
     }
     public void agregarArchivo(Archivo newArch){
         this.archivos.add(newArch);

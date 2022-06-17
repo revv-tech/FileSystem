@@ -54,13 +54,13 @@ public class Controlador {
         // Primero crea el archivo en el disco y verifica si hay campo. Si hay campo devuelve true y lo agrega
         if (this.disco.addArchivo(contenido, idArchivo)){
             Date fechaCreacion = new Date();
-            Archivo newArch = new Archivo(idArchivo, idDirectorio, extension, fechaCreacion, contenido); // Crea la estructura archivo
+            Archivo newArch = new Archivo(nombre,idArchivo, idDirectorio, extension, fechaCreacion, contenido); // Crea la estructura archivo
             Directorio padre = buscarDirectorioXId(idDirectorio); // Buscamos el directorio padre
             padre.agregarArchivo(newArch); // Agrega nuevo archivo
             this.idArchivo = this.idArchivo + 1;
-            System.out.println("Se agrego el archivo al directorio y al disco con exito");
-        }
-        System.out.println("No se agrego el archivo al directorio y al disco");
+            System.out.println("Se agrego el archivo al directorio y al disco con exito. ID: "+ newArch.getIdArchivo());
+        }else
+            System.out.println("No se agrego el archivo al directorio y al disco. Contenido: " + contenido);
     }
     // Crea directorio
     public void crearDirectorio(String nombre, int idDirectorioPadre){
@@ -68,6 +68,7 @@ public class Controlador {
         Directorio newDir = new Directorio(idDirectorioPadre, idDirectorio, nombre); // Crea nuevo dir
         this.idDirectorio = this.idDirectorio + 1; // Aumenta id
         this.directorios.add(newDir); // Agregamos el nuevo directorio a la lista de dirs
+        System.out.println("Se agrego archivo");
     
     }
     
@@ -88,8 +89,12 @@ public class Controlador {
         // Verifica si se puede modificar el archivo en el disco, y si se puede lo hace y retorna true.
         if (disco.modifyArchivo(contenido, idArchivo)){
             // Modifica el contenido
-            this.buscarDirectorioXId(idDirectorio).buscarArchivoXId(idArchivo).modificar(contenido);
-            System.out.println("Se cambio el contenido con exito");
+            //Directorio padre de archivo
+            Directorio padre = this.buscarDirectorioXId(idDirectorio);
+            // Archivo a modificar
+            Archivo archivoMod = padre.buscarArchivoXId(idArchivo);
+            archivoMod.modificar(contenido);
+            System.out.println("Se cambio el contenido con exito. ID: " + idArchivo);
             return true;
         }
         System.out.println("Hubo error al cambiar el contenido");
@@ -122,12 +127,10 @@ public class Controlador {
     
     // Mover Archivo
     public void moverDir(int idDirectorioPadre,int idDirectorioAMover, int newDirectorioPadre){
-        // Dir padre
-        Directorio dirPadre = this.buscarDirectorioXId(idDirectorioPadre);
         // Igualamos dir a mover
         Directorio dirMov = this.buscarDirectorioXId(idDirectorioAMover);
         // Iguala directorio padre a nuevo padre
-        dirMov.setIdDirectorio(newDirectorioPadre);
+        dirMov.setIdDirectorioPadre(newDirectorioPadre);
     }
     
     // Remover Archivo
@@ -137,14 +140,23 @@ public class Controlador {
             Directorio dirPadre = this.buscarDirectorioXId(idDirectorio);
             ArrayList<Archivo> archivosDir =  dirPadre.getArchivos();
             for (int i = 0; i < archivosDir.size(); i++ ){
+                if (archivosDir.isEmpty())
+                    continue;
                 if (archivosDir.get(i).getIdArchivo() == idArchivo){
                     archivosDir.remove(i);
-                    System.out.println("Archivo eliminado");
+                    System.out.println("Archivo eliminado. ID: " + idArchivo);
                 }
                 
             }
         }
         
+    }
+    
+    // Imprimir directorios
+    public void imprimirDirectorios(){
+        for (int i = 0; i < this.directorios.size() ; i++){
+            System.out.println(this.directorios.get(i).imprimir() + "\n");
+        }
     }
     
    
