@@ -20,6 +20,10 @@ import javax.swing.ScrollPaneLayout;
  */
 public class Explorer extends javax.swing.JFrame {
 
+    Controller.Controlador controlador = new Controller.Controlador();
+    
+    boolean disc = false;
+    
     /**
      * Creates new form Explorer
      */
@@ -27,12 +31,17 @@ public class Explorer extends javax.swing.JFrame {
         initComponents();
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       
-            
-        /*JButton boton1 = new JButton("Hola");
-        JToggleButton btn = new JToggleButton("Como estan?");
-        JLabel etiqueta = new JLabel("Saludos y");
-        JTextField campo = new JTextField("Adios..", 12);*/
+        
+        btnImprimirDisco.setEnabled(disc);
+        btnCopiar.setEnabled(disc);
+        btnEliminar.setEnabled(disc);
+        btnImportar.setEnabled(disc);
+        btnModArchivo.setEnabled(disc);
+        btnVerPropiedades.setEnabled(disc);
+        btnMover.setEnabled(disc);
+        btnImportar.setEnabled(disc);
+        btnExportar.setEnabled(disc);
+               
       
     }
 
@@ -47,11 +56,13 @@ public class Explorer extends javax.swing.JFrame {
 
         jDialog1 = new javax.swing.JDialog();
         jDialog2 = new javax.swing.JDialog();
+        CreateFileBtn2 = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         CreateDiskBtn = new javax.swing.JButton();
         CreateDirBtn = new javax.swing.JButton();
         CreateFileBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnImprimirDisco = new javax.swing.JButton();
         directoryURL = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         FileList = new javax.swing.JList<>();
@@ -59,6 +70,10 @@ public class Explorer extends javax.swing.JFrame {
         btnMover = new javax.swing.JButton();
         btnModArchivo = new javax.swing.JButton();
         btnVerPropiedades = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnImportar = new javax.swing.JButton();
+        btnCopiar = new javax.swing.JButton();
+        btnExportar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -82,26 +97,35 @@ public class Explorer extends javax.swing.JFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
+        CreateFileBtn2.setText("Crear Archivo");
+        CreateFileBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateFileBtn2ActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(244, 244, 244));
+        setName("escritorio"); // NOI18N
+        setResizable(false);
 
         jDesktopPane1.setBackground(new java.awt.Color(102, 102, 255));
 
-        CreateDiskBtn.setText("Create Disk");
+        CreateDiskBtn.setText("Crear Disco");
         CreateDiskBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateDiskBtnActionPerformed(evt);
             }
         });
 
-        CreateDirBtn.setText("Create Directoty");
+        CreateDirBtn.setText("Crear Directorio");
         CreateDirBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateDirBtnActionPerformed(evt);
             }
         });
 
-        CreateFileBtn.setText("Create File");
+        CreateFileBtn.setText("Crear Archivo");
         CreateFileBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateFileBtnActionPerformed(evt);
@@ -112,10 +136,18 @@ public class Explorer extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Files  System");
 
+        btnImprimirDisco.setText("Imprimir disco");
+        btnImprimirDisco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirDiscoActionPerformed(evt);
+            }
+        });
+
         jDesktopPane1.setLayer(CreateDiskBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(CreateDirBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(CreateFileBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(btnImprimirDisco, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -126,11 +158,13 @@ public class Explorer extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(CreateDiskBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(CreateDirBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(CreateFileBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnImprimirDisco)
+                .addGap(42, 42, 42))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,24 +174,19 @@ public class Explorer extends javax.swing.JFrame {
                     .addComponent(CreateDiskBtn)
                     .addComponent(CreateDirBtn)
                     .addComponent(CreateFileBtn)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(btnImprimirDisco))
                 .addContainerGap())
         );
 
         directoryURL.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        directoryURL.setText("Escritorio");
         directoryURL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 directoryURLActionPerformed(evt);
             }
         });
 
-        FileList.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        FileList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "[Directorio] Juegos", "[Directorio] Imágenes", "[Directorio] TEC", "[Archivo] Horario.txt", "[Archivo] Tarea.txt", "[Archivo] Prueba.txt" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        FileList.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jScrollPane1.setViewportView(FileList);
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
@@ -179,55 +208,113 @@ public class Explorer extends javax.swing.JFrame {
 
         btnVerPropiedades.setText("Ver Propiedades");
 
+        btnEliminar.setText("Eliminar");
+
+        btnImportar.setText("Importar");
+
+        btnCopiar.setText("Copiar");
+
+        btnExportar.setText("Exportar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jDesktopPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnVerPropiedades, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnModArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnImportar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCopiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(directoryURL)))
-                .addGap(84, 84, 84))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(directoryURL, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(directoryURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(directoryURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
                         .addComponent(btnMover)
-                        .addGap(36, 36, 36)
+                        .addGap(26, 26, 26)
                         .addComponent(btnModArchivo)
-                        .addGap(33, 33, 33)
-                        .addComponent(btnVerPropiedades)))
-                .addContainerGap(120, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVerPropiedades)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCopiar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnImportar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExportar)))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void CreateDiskBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateDiskBtnActionPerformed
         // TODO add your handling code here:
+        CrearDisco ventana = new CrearDisco(this, true);
+       
+        ventana.setVisible(true);
+        
+        int cantSectores,tamSector;
+        
+        cantSectores = (Integer) ventana.cantSectores.getValue();
+        tamSector = (Integer) ventana.tamSector.getValue();
+       
+        
+        
+        System.out.println(cantSectores);
+        System.out.println(tamSector);
+        
+        //crear el disco aca
+        controlador.crearDisco(tamSector, cantSectores);
+        
+        disc= true;
+        btnImprimirDisco.setEnabled(disc);
+        btnCopiar.setEnabled(disc);
+        btnEliminar.setEnabled(disc);
+        btnImportar.setEnabled(disc);
+        btnModArchivo.setEnabled(disc);
+        btnVerPropiedades.setEnabled(disc);
+        btnMover.setEnabled(disc);
+        btnImportar.setEnabled(disc);
+        btnExportar.setEnabled(disc);
+        
     }//GEN-LAST:event_CreateDiskBtnActionPerformed
 
     private void CreateDirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateDirBtnActionPerformed
         // TODO add your handling code here:
+        
+        String nombreDirectorio = JOptionPane.showInputDialog(this,"Ingrese el nombre del directorio nuevo: "); 
+        System.out.println(nombreDirectorio);
+        
+        //aca se crea el nuevo directorio
+        
+        
     }//GEN-LAST:event_CreateDirBtnActionPerformed
 
     private void directoryURLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_directoryURLActionPerformed
@@ -236,9 +323,23 @@ public class Explorer extends javax.swing.JFrame {
 
     private void CreateFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateFileBtnActionPerformed
         // TODO add your handling code here:
+        CrearArchivo ventana = new CrearArchivo(this, true);
+       
+        ventana.setVisible(true);
         
-         
-         
+        String nombre,extension,contenido;
+        
+        nombre = ventana.nombreArchivo.getText();
+        extension = ventana.extensionArchivo.getText();
+        contenido = ventana.contenidoArchivo.getText();
+        
+        
+        System.out.println(nombre);
+        System.out.println(extension);
+        System.out.println(contenido);
+        
+        // hay que crear el archivo
+        
        
     }//GEN-LAST:event_CreateFileBtnActionPerformed
 
@@ -249,6 +350,15 @@ public class Explorer extends javax.swing.JFrame {
     private void btnModArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModArchivoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnModArchivoActionPerformed
+
+    private void CreateFileBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateFileBtn2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CreateFileBtn2ActionPerformed
+
+    private void btnImprimirDiscoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirDiscoActionPerformed
+        // TODO add your handling code here:
+        controlador.disco.toJson();
+    }//GEN-LAST:event_btnImprimirDiscoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,7 +399,13 @@ public class Explorer extends javax.swing.JFrame {
     private javax.swing.JButton CreateDirBtn;
     private javax.swing.JButton CreateDiskBtn;
     private javax.swing.JButton CreateFileBtn;
+    private javax.swing.JButton CreateFileBtn2;
     private javax.swing.JList<String> FileList;
+    private javax.swing.JButton btnCopiar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnExportar;
+    private javax.swing.JButton btnImportar;
+    private javax.swing.JButton btnImprimirDisco;
     private javax.swing.JButton btnModArchivo;
     private javax.swing.JButton btnMover;
     private javax.swing.JButton btnVerPropiedades;

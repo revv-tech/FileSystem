@@ -40,6 +40,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        new Explorer().setVisible(true);
       /*
       Disco disk = new Disco(10,10);
       
@@ -53,7 +55,7 @@ public class Main {
     
       
       disk.toJson();
-    */
+    
      Controlador controlador = new Controlador();
      controlador.crearDisco(10, 10);
      controlador.crearArchivo("Marco", "txt", "Soy Marco Reveiz", 0);
@@ -69,7 +71,7 @@ public class Main {
      
      controlador.moverDir(0, 1, 2);
      controlador.imprimirDirectorios();    
-     controlador.disco.toJson();
+     controlador.disco.toJson();*/
     }
         
   

@@ -32,16 +32,26 @@
         </DimensionLayout>
       </Layout>
     </Container>
+    <Component class="javax.swing.JButton" name="CreateFileBtn2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Crear Archivo"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreateFileBtn2ActionPerformed"/>
+      </Events>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="f4" green="f4" red="f4" type="rgb"/>
     </Property>
+    <Property name="name" type="java.lang.String" value="escritorio" noResource="true"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -60,22 +70,26 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jDesktopPane1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="btnVerPropiedades" max="32767" attributes="0"/>
                   <Component id="btnModArchivo" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnMover" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnEliminar" max="32767" attributes="0"/>
+                  <Component id="btnImportar" max="32767" attributes="0"/>
+                  <Component id="btnCopiar" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnExportar" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="157" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jScrollPane1" alignment="1" min="-2" pref="707" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="directoryURL" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="directoryURL" min="-2" pref="557" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jScrollPane1" min="-2" pref="734" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+              <EmptySpace pref="54" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -83,23 +97,34 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jDesktopPane1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="directoryURL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" min="-2" pref="328" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="directoryURL" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="321" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                       <Component id="btnMover" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="btnModArchivo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnVerPropiedades" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnEliminar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnCopiar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnImportar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnExportar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="120" max="32767" attributes="0"/>
+              <EmptySpace pref="51" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -120,11 +145,13 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="CreateDiskBtn" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="CreateDirBtn" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="CreateFileBtn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnImprimirDisco" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -137,6 +164,7 @@
                       <Component id="CreateDirBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="CreateFileBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnImprimirDisco" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -146,7 +174,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="CreateDiskBtn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Create Disk"/>
+            <Property name="text" type="java.lang.String" value="Crear Disco"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreateDiskBtnActionPerformed"/>
@@ -154,7 +182,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="CreateDirBtn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Create Directoty"/>
+            <Property name="text" type="java.lang.String" value="Crear Directorio"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreateDirBtnActionPerformed"/>
@@ -162,7 +190,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="CreateFileBtn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Create File"/>
+            <Property name="text" type="java.lang.String" value="Crear Archivo"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreateFileBtnActionPerformed"/>
@@ -179,6 +207,14 @@
             <Property name="text" type="java.lang.String" value="Files  System"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JButton" name="btnImprimirDisco">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Imprimir disco"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImprimirDiscoActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="directoryURL">
@@ -186,7 +222,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Escritorio"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="directoryURLActionPerformed"/>
@@ -202,17 +237,10 @@
         <Component class="javax.swing.JList" name="FileList">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="0"/>
+              <Font name="Arial" size="18" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="6">
-                <StringItem index="0" value="[Directorio] Juegos"/>
-                <StringItem index="1" value="[Directorio] Im&#xe1;genes"/>
-                <StringItem index="2" value="[Directorio] TEC"/>
-                <StringItem index="3" value="[Archivo] Horario.txt"/>
-                <StringItem index="4" value="[Archivo] Tarea.txt"/>
-                <StringItem index="5" value="[Archivo] Prueba.txt"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -248,6 +276,26 @@
     <Component class="javax.swing.JButton" name="btnVerPropiedades">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ver Propiedades"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnEliminar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Eliminar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnImportar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Importar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnCopiar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Copiar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnExportar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Exportar"/>
       </Properties>
     </Component>
   </SubComponents>
