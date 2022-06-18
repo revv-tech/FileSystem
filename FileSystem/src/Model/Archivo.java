@@ -20,6 +20,7 @@ public class Archivo {
     Date fechaModificacion;
     int tamano;
     String contenido;
+    String ruta;
     
     public Archivo(){}
     public Archivo(String nombre,int idArchivo, int idDirectorio, String ext, Date fechaCreacion, String contenido) {
@@ -42,6 +43,7 @@ public class Archivo {
                 "\n idDirectorio: " + idDirectorio + 
                 "\n Nombre: " + nombre + 
                 "\n Extensión: " + ext +
+                "\n Ruta: " + ruta +
                 "\n Fecha de Creacion: " + fechaCreacion + 
                 "\n Fecha de Modificacion:" + fechaModificacion + 
                 "\n Tamaño:" + tamano + 
@@ -116,5 +118,12 @@ public class Archivo {
         this.contenido = contenido;
     }
     
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }
     
 }

@@ -15,22 +15,26 @@ public class Directorio {
     int idDirectorioPadre;
     int idDirectorio;
     String nombre;
+    String ruta;
     ArrayList<Archivo> archivos;
  
-    public Directorio(){};
+    public Directorio(int idDirectorio, String nombre){
+        this.ruta = "root";
+        this.idDirectorio = idDirectorio;
+        this.idDirectorioPadre = idDirectorio;
+        this.idDirectorio = idDirectorio;
+        this.nombre = nombre;
+        this.archivos = new ArrayList<Archivo>();
+    };
     
-    public Directorio(int idDirectorioPadre, int idDirectorio, String nombre) {
+    public Directorio(String rutaPadre, int idDirectorioPadre, int idDirectorio, String nombre) {
+        this.ruta = rutaPadre + "/" + nombre;
         this.idDirectorioPadre = idDirectorioPadre;
         this.idDirectorio = idDirectorio;
         this.nombre = nombre;
         this.archivos = new ArrayList<Archivo>();
     }
-    public Directorio copy(String nombre, int idDirectorio){
-        Directorio newDir = new Directorio();
-        newDir.nombre = nombre;
-        newDir.idDirectorio = idDirectorio;
-        return newDir;
-    }
+    
     public Archivo buscarArchivoXId(int idArchivo){
         System.out.println(idArchivo);
         for (int i = 0 ; i < this.archivos.size() ; i++){
@@ -45,6 +49,7 @@ public class Directorio {
         String msg = "----------------------------------------\nidDirectorio: " + idDirectorio + 
                 "\nidDirectorioPadre: " + idDirectorioPadre + 
                 "\nNombre: " + nombre +
+                "\nRuta:" + ruta + 
                 "\n----- Archivos del Directorio: -----\n";
         for (int i = 0 ; i < this.archivos.size() ; i++){
             msg = msg + this.archivos.get(i).verPropiedades();
@@ -79,6 +84,12 @@ public class Directorio {
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    public String getRuta() {
+        return ruta;
+    }
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
     }
     
 }
