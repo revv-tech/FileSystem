@@ -22,7 +22,8 @@ public class Archivo {
     String contenido;
     
     public Archivo(){}
-    public Archivo(int idArchivo, int idDirectorio, String ext, Date fechaCreacion, String contenido) {
+    public Archivo(String nombre,int idArchivo, int idDirectorio, String ext, Date fechaCreacion, String contenido) {
+        this.nombre = nombre;
         this.idArchivo = idArchivo;
         this.idDirectorio = idDirectorio;
         this.ext = ext;
@@ -37,14 +38,14 @@ public class Archivo {
     }
     // Ver propiedades
     public String verPropiedades(){
-        return "idArchivo: " + idArchivo + 
+        return "---------------------------------------\nidArchivo: " + idArchivo + 
                 "\n idDirectorio: " + idDirectorio + 
                 "\n Nombre: " + nombre + 
                 "\n Extensión: " + ext +
                 "\n Fecha de Creacion: " + fechaCreacion + 
                 "\n Fecha de Modificacion:" + fechaModificacion + 
                 "\n Tamaño:" + tamano + 
-                "\n Contenido:" + contenido + '\n';
+                "\n Contenido:" + contenido + "\n---------------------------------------\n";
     }
     // Copiar Archivo
     public Archivo copy(int idArchivo){
