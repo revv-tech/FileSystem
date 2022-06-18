@@ -36,8 +36,9 @@ public class Directorio {
     }
     
     public Archivo buscarArchivoXId(int idArchivo){
-        System.out.println(idArchivo);
+        
         for (int i = 0 ; i < this.archivos.size() ; i++){
+            System.out.println(idArchivo);
             if (this.archivos.get(i).getIdArchivo() == idArchivo)
                 return archivos.get(i);
         }

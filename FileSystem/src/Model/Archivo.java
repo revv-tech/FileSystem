@@ -34,8 +34,9 @@ public class Archivo {
         this.contenido = contenido;
     }
     // Mover archivo de directorio
-    public void mover(int idDirectorio) {
-        this.idDirectorio = idDirectorio;
+    public void mover(String rutaDirectorioPadre,int nuevoPadre) {
+        this.ruta = rutaDirectorioPadre + "/" + this.nombre + "/" + this.ruta;
+        this.idDirectorio = nuevoPadre;
     }
     // Ver propiedades
     public String verPropiedades(){

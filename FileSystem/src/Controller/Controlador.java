@@ -50,8 +50,6 @@ public class Controlador {
     // Crea archivo
     public void crearArchivo(String nombre, String extension, String contenido, int idDirectorio){
         Directorio padre = buscarDirectorioXId(idDirectorio); // Buscamos el directorio padre
-        
-        
         // Primero crea el archivo en el disco y verifica si hay campo. Si hay campo devuelve true y lo agrega
         if (this.disco.addArchivo(contenido, idArchivo)){
             Date fechaCreacion = new Date();
@@ -83,7 +81,6 @@ public class Controlador {
         }
         return new List[] { actual.getArchivos(), actualDirs };
     }
-    
     public ArrayList<Directorio> getDirectoriosDirActual(int idDirectorioPadre){
         ArrayList<Directorio> actualDirs = new ArrayList<>();
         for (int i = 0 ; i < this.directorios.size() ; i++){
@@ -95,8 +92,7 @@ public class Controlador {
                 
         }
         return actualDirs;
-    }
-    
+    } 
     public Directorio getDirPorNombre(int idDirectorioPadre, String nombre){
         Directorio actualDirs = null;
         for (int i = 0 ; i < this.directorios.size() ; i++){
@@ -109,13 +105,11 @@ public class Controlador {
         }
         return actualDirs;
     }
-    
     public ArrayList<Archivo> getArchivosDirActual(int idDirectorio){
         Directorio actual = this.buscarDirectorioXId(idDirectorio);
         
         return actual.getArchivos();
     }
-    
      public Archivo getArchivoPorNombre(int idDirectorioPadre, String nombre){
         Archivo actualArchivo = null;
         Directorio actual = this.buscarDirectorioXId(idDirectorioPadre);
@@ -158,13 +152,15 @@ public class Controlador {
         return this.buscarDirectorioXId(idDirectorio).buscarArchivoXId(idArchivo).getContenido();
     }
     // Mover Archivo
-    public void moverFile(int idDirectorioPadre,int idArchivo, int newDirectorioPadre){
+    public void moverFile(int idDirectorioPadre, int idArchivo, int newDirectorioPadre){
         Directorio dirPadre = this.buscarDirectorioXId(idDirectorioPadre);
+        Directorio newPadre = this.buscarDirectorioXId(newDirectorioPadre);
         // Igualamos archivo a mover
         Archivo arch = this.buscarDirectorioXId(idDirectorioPadre).buscarArchivoXId(idArchivo);
-        arch.setIdDirectorio(newDirectorioPadre);
+        arch.mover(newPadre.getRuta(), newPadre.getIdDirectorio());
         // Agrega archivo a nuevo directorio
-        this.buscarDirectorioXId(newDirectorioPadre).agregarArchivo(arch);
+        // Si existe uno del mismo nombre leagregamos un (1)
+        newPadre.agregarArchivo(arch);
         // Elimina el archvio del directorio actual
         dirPadre.getArchivos().remove(arch);
     }

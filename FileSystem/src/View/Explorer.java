@@ -30,7 +30,7 @@ public class Explorer extends javax.swing.JFrame {
     boolean disc = false;
 
     Directorio dirActual;
-
+    Archivo archivoAMover;
     /**
      * Creates new form Explorer
      */
@@ -228,6 +228,11 @@ public class Explorer extends javax.swing.JFrame {
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnImportar.setText("Importar");
 
@@ -354,6 +359,7 @@ public class Explorer extends javax.swing.JFrame {
             modelo.addElement("[Archivo]" + archivo.getNombre());
         }
     }
+    
 
 
     private void CreateDirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateDirBtnActionPerformed
@@ -397,7 +403,14 @@ public class Explorer extends javax.swing.JFrame {
     }//GEN-LAST:event_CreateFileBtnActionPerformed
 
     private void btnMoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoverActionPerformed
-        // TODO add your handling code here:
+        MoverArchivo ventana = new MoverArchivo(this, true);
+        ventana.controlador = this.controlador;
+        ventana.dirActual = this.dirActual;
+        ventana.archivoActual = this.archivoAMover;
+        ventana.llenarFileList();
+        ventana.setVisible(true);
+        llenarFileList();
+
     }//GEN-LAST:event_btnMoverActionPerformed
 
     private void btnModArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModArchivoActionPerformed
@@ -437,6 +450,13 @@ public class Explorer extends javax.swing.JFrame {
 
     private void FileListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FileListMouseClicked
         // TODO add your handling code here:
+        if (evt.getClickCount() == 1) {
+            String nombre = FileList.getSelectedValue();
+
+            String[] parts = nombre.split("\\]");
+            Archivo archivo = controlador.getArchivoPorNombre(dirActual.getIdDirectorio(), parts[1]);
+            this.archivoAMover = archivo;
+        }
         if (evt.getClickCount() == 2) {
             String nombre = FileList.getSelectedValue();
 
@@ -448,6 +468,7 @@ public class Explorer extends javax.swing.JFrame {
             } else {
                 
                 Archivo archivo = controlador.getArchivoPorNombre(dirActual.getIdDirectorio(), parts[1]);
+                
                 System.out.println(archivo.getNombre());
                 VerArchivo ventana = new VerArchivo(this, true);
                 
@@ -458,6 +479,7 @@ public class Explorer extends javax.swing.JFrame {
             }
 
         }
+        
     }//GEN-LAST:event_FileListMouseClicked
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
@@ -487,6 +509,21 @@ public class Explorer extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_btnVerPropiedadesActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        String nombre = FileList.getSelectedValue();
+
+        String[] parts = nombre.split("\\]");
+
+        if (parts[0].contains("Archivo")) {
+            
+            Archivo archivo = controlador.getArchivoPorNombre(dirActual.getIdDirectorio(), parts[1]);
+            controlador.removerArch(dirActual.getIdDirectorio(), archivo.getIdArchivo());
+            llenarFileList();
+            JOptionPane.showMessageDialog(this, "Archivo eliminado",
+                                   "DONE", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
