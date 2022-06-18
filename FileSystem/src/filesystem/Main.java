@@ -40,6 +40,7 @@ public class Main {
      System.out.println(controlador.listaDirActual(0));
      controlador.imprimirDirectorios();    
      controlador.disco.toJson();
+     
     }
     
 }

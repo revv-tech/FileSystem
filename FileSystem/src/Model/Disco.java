@@ -58,7 +58,7 @@ public class Disco {
                 
                 for (int j = 0 ; j < this.tamanhoSegmento ; j++){
                    
-                   if (!contenido.isBlank()){
+                   if (!contenido.isEmpty()){
                        Byte tmp = this.segmentos.get(i).getBytes().get(j);
                        String firstLetter = contenido.substring(0, 1);
                        
