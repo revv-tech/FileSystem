@@ -31,7 +31,7 @@ public class Controlador {
     // Inicia programa, crea el disco de acuerdo a los tamaños dados y crea el primer directorio
     public void crearDisco(int tamaho, int tamahoSegmento){
         this.disco = new Disco(tamaho, tamahoSegmento);
-        this.principal = new Directorio(idDirectorio, "root");
+        this.principal = new Directorio(idDirectorio, "Escritorio");
         this.idDirectorio = this.idDirectorio + 1;
         this.directorios = new ArrayList<Directorio>();
         this.directorios.add(principal); // Agrega el principal a lista de dirs
@@ -78,10 +78,57 @@ public class Controlador {
         Directorio actual = this.buscarDirectorioXId(idDirectorio);
         ArrayList<Directorio> actualDirs = new ArrayList<Directorio>();
         for (int i = 0 ; i < this.directorios.size() ; i++){
-            if (this.directorios.get(i).getIdDirectorioPadre() == idDirectorio) // Verifica si es el padre o no
+            if (this.directorios.get(i).getIdDirectorioPadre() == idDirectorio && idDirectorio != 0 ) // Verifica si es el padre o no
                 actualDirs.add(this.directorios.get(i));
         }
         return new List[] { actual.getArchivos(), actualDirs };
+    }
+    
+    public ArrayList<Directorio> getDirectoriosDirActual(int idDirectorioPadre){
+        ArrayList<Directorio> actualDirs = new ArrayList<>();
+        for (int i = 0 ; i < this.directorios.size() ; i++){
+            if (this.directorios.get(i).getIdDirectorioPadre() == idDirectorioPadre ) // Verifica si es el padre o no
+                if(this.directorios.get(i).getIdDirectorio()!= idDirectorioPadre)
+                {
+                    actualDirs.add(this.directorios.get(i));
+                }
+                
+        }
+        return actualDirs;
+    }
+    
+    public Directorio getDirPorNombre(int idDirectorioPadre, String nombre){
+        Directorio actualDirs = null;
+        for (int i = 0 ; i < this.directorios.size() ; i++){
+            if (this.directorios.get(i).getIdDirectorioPadre() == idDirectorioPadre ) // Verifica si es el padre o no
+                if(this.directorios.get(i).getIdDirectorio()!= idDirectorioPadre && this.directorios.get(i).getNombre().equals(nombre) )
+                {
+                    actualDirs = this.directorios.get(i);
+                }
+                
+        }
+        return actualDirs;
+    }
+    
+    public ArrayList<Archivo> getArchivosDirActual(int idDirectorio){
+        Directorio actual = this.buscarDirectorioXId(idDirectorio);
+        
+        return actual.getArchivos();
+    }
+    
+     public Archivo getArchivoPorNombre(int idDirectorioPadre, String nombre){
+        Archivo actualArchivo = null;
+        Directorio actual = this.buscarDirectorioXId(idDirectorioPadre);
+        
+     
+        for (int i = 0 ; i < actual.getArchivos().size() ; i++){
+         
+            if(actual.getArchivos().get(i).getNombre().equals(nombre) )
+            {
+                actualArchivo  = actual.getArchivos().get(i);
+            }
+        }
+        return actualArchivo;
     }
     // Modificar archivos. Si es verdadero es que se modifico el archivo con exito
     public boolean modFile(int idDirectorio, int idArchivo, String contenido) {
