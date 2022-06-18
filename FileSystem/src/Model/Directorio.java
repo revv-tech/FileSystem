@@ -19,7 +19,7 @@ public class Directorio {
     ArrayList<Archivo> archivos;
  
     public Directorio(int idDirectorio, String nombre){
-        this.ruta = "root";
+        this.ruta = "Escritorio";
         this.idDirectorio = idDirectorio;
         this.idDirectorioPadre = idDirectorio;
         this.idDirectorio = idDirectorio;
