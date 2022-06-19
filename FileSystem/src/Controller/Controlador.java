@@ -199,4 +199,39 @@ public class Controlador {
             System.out.println(this.directorios.get(i).imprimir() + "\n");
         }
     } 
+    //Remover Directorios
+    public void removerDir(String ruta){
+         ArrayList<Integer> indexes = new ArrayList<Integer>();
+        //Hay que borrar el directorio que se quiere borrar
+        //Borra los directorios que estan dentro del que se quiere borrar
+        for (int i = 0; i < directorios.size(); i++) {
+            String original = directorios.get(i).getRuta();
+            
+            if (original.contains(ruta)){
+                
+                Directorio tmp = directorios.get(i);
+                ArrayList<Archivo> archivosDirectorioTmp = tmp.getArchivos();
+                for (int j = 0 ; j < archivosDirectorioTmp.size() ; j++){
+                    System.out.println(archivosDirectorioTmp.get(j).getNombre());
+                    disco.removeArchivo(archivosDirectorioTmp.get(j).getIdArchivo());
+                }
+                
+                System.out.println("La cadena original contiene la subcadena");
+            }
+            
+        }
+        
+        for (int i = 0; i < directorios.size(); i++) {
+            String original = directorios.get(i).getRuta();
+            
+            if (original.contains(ruta)){
+                
+                 directorios.remove(i);
+                
+                System.out.println("La cadena original contiene la subcadena");
+            }
+            
+        }
+        
+    }
 }

@@ -528,15 +528,21 @@ public class Explorer extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         String nombre = FileList.getSelectedValue();
-
-        String[] parts = nombre.split("\\]");
-
+        String[] parts = nombre.split("\\]");   
         if (parts[0].contains("Archivo")) {
             
             Archivo archivo = controlador.getArchivoPorNombre(dirActual.getIdDirectorio(), parts[1]);
             controlador.removerArch(dirActual.getIdDirectorio(), archivo.getIdArchivo());
             llenarFileList();
             JOptionPane.showMessageDialog(this, "Archivo eliminado",
+                                   "DONE", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if (parts[0].contains("[Directorio")) {
+            
+            Directorio directorio = controlador.getDirPorNombre(dirActual.getIdDirectorio(), parts[1]);
+            controlador.removerDir(directorio.getRuta());
+            llenarFileList();
+            JOptionPane.showMessageDialog(this, "Directorio eliminado",
                                    "DONE", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
