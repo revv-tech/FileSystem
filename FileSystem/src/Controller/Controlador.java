@@ -226,15 +226,15 @@ public class Controlador {
         
     }
     // Find rutas
-    public ArrayList<String> findRutas(String palabra){
-       ArrayList<String> rutas = new ArrayList<String>();
+    public String findRutas(String palabra){
+       String rutas = "Rutas encontradas:\n";
        for (int i = 0; i < directorios.size(); i++) {            
             Directorio tmp = directorios.get(i);
             ArrayList<Archivo> archivosDirectorioTmp = tmp.getArchivos();
             for (int j = 0 ; j < archivosDirectorioTmp.size() ; j++){
-                String original = archivosDirectorioTmp.get(i).getRuta();
+                String original = archivosDirectorioTmp.get(j).getRuta();
                if (original.contains(palabra)){
-                   rutas.add(archivosDirectorioTmp.get(i).getRuta());
+                   rutas = rutas + "\n" + archivosDirectorioTmp.get(j).getRuta();
                }           
             }
             System.out.println("La cadena original contiene la subcadena");
