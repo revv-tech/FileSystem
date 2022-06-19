@@ -201,37 +201,44 @@ public class Controlador {
     } 
     //Remover Directorios
     public void removerDir(String ruta){
-         ArrayList<Integer> indexes = new ArrayList<Integer>();
         //Hay que borrar el directorio que se quiere borrar
         //Borra los directorios que estan dentro del que se quiere borrar
         for (int i = 0; i < directorios.size(); i++) {
             String original = directorios.get(i).getRuta();
-            
             if (original.contains(ruta)){
-                
                 Directorio tmp = directorios.get(i);
                 ArrayList<Archivo> archivosDirectorioTmp = tmp.getArchivos();
                 for (int j = 0 ; j < archivosDirectorioTmp.size() ; j++){
                     System.out.println(archivosDirectorioTmp.get(j).getNombre());
                     disco.removeArchivo(archivosDirectorioTmp.get(j).getIdArchivo());
                 }
-                
                 System.out.println("La cadena original contiene la subcadena");
             }
-            
         }
-        
         for (int i = 0; i < directorios.size(); i++) {
             String original = directorios.get(i).getRuta();
-            
             if (original.contains(ruta)){
-                
                  directorios.remove(i);
-                
                 System.out.println("La cadena original contiene la subcadena");
             }
             
         }
         
+    }
+    // Find rutas
+    public ArrayList<String> findRutas(String palabra){
+       ArrayList<String> rutas = new ArrayList<String>();
+       for (int i = 0; i < directorios.size(); i++) {            
+            Directorio tmp = directorios.get(i);
+            ArrayList<Archivo> archivosDirectorioTmp = tmp.getArchivos();
+            for (int j = 0 ; j < archivosDirectorioTmp.size() ; j++){
+                String original = archivosDirectorioTmp.get(i).getRuta();
+               if (original.contains(palabra)){
+                   rutas.add(archivosDirectorioTmp.get(i).getRuta());
+               }           
+            }
+            System.out.println("La cadena original contiene la subcadena");
+       }
+       return rutas;
     }
 }
