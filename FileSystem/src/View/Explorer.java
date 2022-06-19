@@ -31,6 +31,7 @@ public class Explorer extends javax.swing.JFrame {
 
     Directorio dirActual;
     Archivo archivoAMover;
+    Directorio dirAMover;
     /**
      * Creates new form Explorer
      */
@@ -83,6 +84,7 @@ public class Explorer extends javax.swing.JFrame {
         btnCopiar = new javax.swing.JButton();
         btnExportar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
+        btnMoverDir = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -206,7 +208,7 @@ public class Explorer extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel2.setText("Ruta :");
 
-        btnMover.setText("Mover");
+        btnMover.setText("Mover Archivo");
         btnMover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMoverActionPerformed(evt);
@@ -247,6 +249,13 @@ public class Explorer extends javax.swing.JFrame {
             }
         });
 
+        btnMoverDir.setText("Mover Directorio");
+        btnMoverDir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoverDirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -254,14 +263,16 @@ public class Explorer extends javax.swing.JFrame {
             .addComponent(jDesktopPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnVerPropiedades, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnModArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnImportar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCopiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnVerPropiedades, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnModArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnImportar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCopiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnMoverDir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnMover, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -287,9 +298,11 @@ public class Explorer extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
+                        .addGap(40, 40, 40)
                         .addComponent(btnMover)
-                        .addGap(26, 26, 26)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnMoverDir)
+                        .addGap(15, 15, 15)
                         .addComponent(btnModArchivo)
                         .addGap(18, 18, 18)
                         .addComponent(btnVerPropiedades)
@@ -452,10 +465,16 @@ public class Explorer extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getClickCount() == 1) {
             String nombre = FileList.getSelectedValue();
-
             String[] parts = nombre.split("\\]");
-            Archivo archivo = controlador.getArchivoPorNombre(dirActual.getIdDirectorio(), parts[1]);
-            this.archivoAMover = archivo;
+            if (parts[0].contains("[Directorio")) {
+                this.dirAMover = controlador.getDirPorNombre(dirActual.getIdDirectorio(), parts[1]);
+            }else{
+                Archivo archivo = controlador.getArchivoPorNombre(dirActual.getIdDirectorio(), parts[1]);
+                this.archivoAMover = archivo;
+            }
+            
+            
+            
         }
         if (evt.getClickCount() == 2) {
             String nombre = FileList.getSelectedValue();
@@ -466,12 +485,9 @@ public class Explorer extends javax.swing.JFrame {
                 dirActual = controlador.getDirPorNombre(dirActual.getIdDirectorio(), parts[1]);
                 llenarFileList();
             } else {
-                
                 Archivo archivo = controlador.getArchivoPorNombre(dirActual.getIdDirectorio(), parts[1]);
-                
-                System.out.println(archivo.getNombre());
+                //System.out.println(archivo.getNombre());
                 VerArchivo ventana = new VerArchivo(this, true);
-                
                 ventana.nombreArchivo.setText(archivo.getNombre());
                 ventana.extensionArchivo.setText(archivo.getExt());
                 ventana.contenidoArchivo.setText(archivo.getContenido());
@@ -525,6 +541,16 @@ public class Explorer extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void btnMoverDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoverDirActionPerformed
+        MoverDirectorio ventana = new MoverDirectorio(this, true);
+        ventana.controlador = this.controlador;
+        ventana.dirActual = this.dirActual;
+        ventana.dirAMover = this.dirAMover;
+        ventana.llenarFileList();
+        ventana.setVisible(true);
+        llenarFileList();
+    }//GEN-LAST:event_btnMoverDirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -575,6 +601,7 @@ public class Explorer extends javax.swing.JFrame {
     private javax.swing.JButton btnImprimirDisco;
     private javax.swing.JButton btnModArchivo;
     private javax.swing.JButton btnMover;
+    private javax.swing.JButton btnMoverDir;
     private javax.swing.JButton btnVerPropiedades;
     private javax.swing.JButton btnVolver;
     private javax.swing.JTextField directoryURL;

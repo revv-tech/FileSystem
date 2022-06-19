@@ -59,6 +59,11 @@ public class Directorio {
         
         
     }
+    public void cambiarRutasDeArchivos(){
+        for (int i = 0; i < this.archivos.size() ; i++){
+            this.archivos.get(i).setRuta(ruta + "/" + this.archivos.get(i).getNombre() + this.archivos.get(i).getExt());
+        }
+    }
     public void agregarArchivo(Archivo newArch){
         this.archivos.add(newArch);
     }

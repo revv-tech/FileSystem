@@ -47,9 +47,9 @@ public class Archivo {
                 "\n Extensión: " + ext +
                 "\n Ruta: " + ruta +
                 "\n Fecha de Creacion: " + fechaCreacion + 
-                "\n Fecha de Modificacion:" + fechaModificacion + 
-                "\n Tamaño:" + tamano + 
-                "\n Contenido:" + contenido + "\n---------------------------------------\n";
+                "\n Fecha de Modificacion: " + fechaModificacion + 
+                "\n Tamaño: " + tamano + 
+                "\n Contenido: " + contenido + "\n---------------------------------------\n";
     }
     // Copiar Archivo
     public Archivo copy(int idArchivo){

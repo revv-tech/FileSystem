@@ -168,8 +168,12 @@ public class Controlador {
     public void moverDir(int idDirectorioPadre,int idDirectorioAMover, int newDirectorioPadre){
         // Igualamos dir a mover
         Directorio dirMov = this.buscarDirectorioXId(idDirectorioAMover);
+        Directorio newPadre = this.buscarDirectorioXId(newDirectorioPadre);
         // Iguala directorio padre a nuevo padre
+        dirMov.setRuta("");
+        dirMov.setRuta(newPadre.getRuta() + "/" + dirMov.getNombre());
         dirMov.setIdDirectorioPadre(newDirectorioPadre);
+        dirMov.cambiarRutasDeArchivos();
     }
     // Remover Archivo
     public void removerArch(int idDirectorio,int idArchivo){

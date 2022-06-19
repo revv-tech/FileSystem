@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author David Castro Holguin
  */
-public class MoverArchivo extends javax.swing.JDialog {
+public class MoverDirectorio extends javax.swing.JDialog {
 
     /**
      * Creates new form CrearArchivo
@@ -23,26 +23,26 @@ public class MoverArchivo extends javax.swing.JDialog {
     Controller.Controlador controlador;
     Archivo archivoActual;
     Directorio newPadre;
+    Directorio dirAMover;
 
     boolean disc = false;
 
     Directorio dirActual;
     
-    public MoverArchivo(java.awt.Frame parent, boolean modal) {
-        
+    public MoverDirectorio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         FileList.setModel(modelo);
-        
     }
     
     public void llenarFileList() {
-        this.nombreArchivo.setText(this.archivoActual.getNombre());
+        this.nombreArchivo.setText(this.dirAMover.getNombre());
         ArrayList<Directorio> directorios = controlador.getDirectoriosDirActual(dirActual.getIdDirectorio());
         directoryURL.setText(dirActual.getRuta());
         modelo.clear();
         for (Directorio directorio : directorios) {
-            modelo.addElement("[Directorio]" + directorio.getNombre());
+            if (directorio.getIdDirectorio() != dirAMover.getIdDirectorio())
+                modelo.addElement("[Directorio]" + directorio.getNombre());
         }
 
     }
@@ -68,7 +68,7 @@ public class MoverArchivo extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jLabel1.setText("Nombre del Archivo: ");
+        jLabel1.setText("Nombre del Directorio: ");
 
         nombreArchivo.setEditable(false);
         nombreArchivo.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +185,7 @@ public class MoverArchivo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnMoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoverActionPerformed
-        controlador.moverFile(archivoActual.getIdDirectorio(), archivoActual.getIdArchivo(), dirActual.getIdDirectorio());
+        controlador.moverDir(this.dirAMover.getIdDirectorioPadre(),this.dirAMover.getIdDirectorio(),this.dirActual.getIdDirectorio());
         
         this.dispose();
     }//GEN-LAST:event_btnMoverActionPerformed
@@ -215,14 +215,22 @@ public class MoverArchivo extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MoverArchivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MoverDirectorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MoverArchivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MoverDirectorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MoverArchivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MoverDirectorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MoverArchivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MoverDirectorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -235,7 +243,7 @@ public class MoverArchivo extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MoverArchivo dialog = new MoverArchivo(new javax.swing.JFrame(), true);
+                MoverDirectorio dialog = new MoverDirectorio(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -255,6 +263,6 @@ public class MoverArchivo extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField nombreArchivo;
+    public javax.swing.JTextField nombreArchivo;
     // End of variables declaration//GEN-END:variables
 }
