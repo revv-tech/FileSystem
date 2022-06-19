@@ -26,9 +26,7 @@ import javax.swing.ScrollPaneLayout;
 public class Explorer extends javax.swing.JFrame {
 
     Controller.Controlador controlador = new Controller.Controlador();
-
     boolean disc = false;
-
     Directorio dirActual;
     Archivo archivoAMover;
     Directorio dirAMover;
@@ -50,8 +48,9 @@ public class Explorer extends javax.swing.JFrame {
         btnVerPropiedades.setEnabled(disc);
         btnMover.setEnabled(disc);
         btnImportar.setEnabled(disc);
-        btnExportar.setEnabled(disc);
-
+        btnExportar.setEnabled(disc);   
+        btnBuscar.setEnabled(disc); 
+        btnMoverDir.setEnabled(disc);
     }
 
     /**
@@ -360,6 +359,8 @@ public class Explorer extends javax.swing.JFrame {
         btnMover.setEnabled(disc);
         btnImportar.setEnabled(disc);
         btnExportar.setEnabled(disc);
+        btnBuscar.setEnabled(disc); 
+        btnMoverDir.setEnabled(disc);
 
         dirActual = controlador.directorios.get(0);
 
