@@ -20,8 +20,15 @@ public class Segmento {
         this.id = id;
         this.tamanho = tamanho;
         this.bytes = new ArrayList<Byte>();
+        this.setBytesList();
     }
-
+    
+    public void setBytesList() {
+        for (int i = 0 ; i < this.tamanho ; i++){
+            Byte b = new Byte();
+            this.bytes.add(b);
+        }
+    }
     public int getId() {
         return id;
     }
@@ -46,10 +53,7 @@ public class Segmento {
         this.tamanho = tamanho;
     }
     
+    public void eliminarArchivo(int idArchivo){
     
-    
-    
-    
-    
-    
+    }
 }

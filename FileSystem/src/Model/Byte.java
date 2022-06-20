@@ -13,9 +13,9 @@ public class Byte {
     private int idArchivo; // ID del archivo al que pertenece
     private String caracter; // Contenido del archivo
     
-    public Byte(int idArchivo, String caracter) {
-        this.idArchivo = idArchivo;
-        this.caracter = caracter;
+    public Byte() {
+        this.idArchivo = 0;
+        this.caracter = "-";
     }
 
     public int getIdArchivo() {
@@ -33,6 +33,13 @@ public class Byte {
     public void setCaracter(String caracter) {
         this.caracter = caracter;
     }
+    // Resetea los valores
+    public void resetByte(){
+        this.idArchivo = 0;
+        this.caracter = "-";
+    }
+    
+    
     
     
 }
