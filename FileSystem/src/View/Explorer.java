@@ -8,9 +8,17 @@ import Model.Archivo;
 import Model.Directorio;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -239,6 +247,11 @@ public class Explorer extends javax.swing.JFrame {
         });
 
         btnCopiar.setText("Copiar");
+        btnCopiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCopiarActionPerformed(evt);
+            }
+        });
 
         btnExportar.setText("Exportar");
         btnExportar.addActionListener(new java.awt.event.ActionListener() {
@@ -557,7 +570,7 @@ public class Explorer extends javax.swing.JFrame {
             ventana.dirAMover = this.dirAMover;
             ventana.llenarFileList();
             ventana.setVisible(true);
-           
+
         } else {
             MoverArchivo ventana = new MoverArchivo(this, true);
             ventana.controlador = this.controlador;
@@ -566,8 +579,8 @@ public class Explorer extends javax.swing.JFrame {
             ventana.llenarFileList();
             ventana.setVisible(true);
         }
-        
-         llenarFileList();
+
+        llenarFileList();
 
 
     }//GEN-LAST:event_btnMoverActionPerformed
@@ -582,24 +595,90 @@ public class Explorer extends javax.swing.JFrame {
     private void btnImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarActionPerformed
         // TODO add your handling code here:
         JFileChooser filechooser = new JFileChooser();
-        
+
         filechooser.setCurrentDirectory(new File("."));
-        
+
         int response = filechooser.showOpenDialog(null);
-        
-        if(response == JFileChooser.APPROVE_OPTION){
+
+        if (response == JFileChooser.APPROVE_OPTION) {
+
             File file = new File(filechooser.getSelectedFile().getAbsolutePath());
-            System.out.println(file);
+
+            try {
+                BufferedReader obj = new BufferedReader(new FileReader(file));
+                
+                String strng;
+                String contenido = "";
+                
+                while ((strng = obj.readLine()) != null) {
+                    contenido = contenido+strng;
+                }
+                System.out.println(contenido);
+                String[] parts = file.getName().split("\\.");
+                controlador.crearArchivo(parts[0], parts[1], contenido, dirActual.getIdDirectorio());
+
+            } catch (IOException ex) {
+                Logger.getLogger(Explorer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            llenarFileList();
+
         }
-        
+
         // aca se debe leer el archivo he irlo guardsndo en el disco
-        
         //ya se tiene la ruta
     }//GEN-LAST:event_btnImportarActionPerformed
 
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
         // TODO add your handling code here:
+        try {
+            String ruta = ".\\"+archivoAMover.getNombre()+".txt";
+            String contenido = archivoAMover.getContenido();
+            File file = new File(ruta);
+            // Si el archivo no existe es creado
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(contenido);
+            bw.close();
+            
+            
+            JOptionPane.showMessageDialog(this, "El archivo ha sido creado con exito",
+                    "DONE", JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnExportarActionPerformed
+
+    private void btnCopiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCopiarActionPerformed
+        // TODO add your handling code here:
+        
+        String nombre = FileList.getSelectedValue();
+
+        String[] parts = nombre.split("\\]");
+
+        if (parts[0].contains("Directorio")) {
+            MoverDirectorio ventana = new MoverDirectorio(this, true);
+            ventana.controlador = this.controlador;
+            ventana.dirActual = this.dirActual;
+            ventana.dirAMover = this.dirAMover;
+            ventana.llenarFileList();
+            ventana.setVisible(true);
+
+        } else {
+            CopiarArchivo ventana = new CopiarArchivo(this, true);
+            ventana.controlador = this.controlador;
+            ventana.dirActual = this.dirActual;
+            ventana.archivoActual = this.archivoAMover;
+            ventana.llenarFileList();
+            ventana.setVisible(true);
+        }
+
+        llenarFileList();
+    }//GEN-LAST:event_btnCopiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -615,16 +694,24 @@ public class Explorer extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Explorer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Explorer.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Explorer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Explorer.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Explorer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Explorer.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Explorer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Explorer.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
