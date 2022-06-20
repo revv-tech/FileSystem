@@ -72,19 +72,16 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnVerPropiedades" max="32767" attributes="0"/>
-                          <Component id="btnModArchivo" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnEliminar" max="32767" attributes="0"/>
-                          <Component id="btnImportar" max="32767" attributes="0"/>
-                          <Component id="btnCopiar" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnExportar" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
-                          <Component id="btnMoverDir" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Component id="btnMover" min="-2" pref="147" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btnVerPropiedades" max="32767" attributes="0"/>
+                      <Component id="btnModArchivo" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnEliminar" max="32767" attributes="0"/>
+                      <Component id="btnImportar" max="32767" attributes="0"/>
+                      <Component id="btnCopiar" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnExportar" alignment="1" min="-2" pref="147" max="-2" attributes="0"/>
+                      <Component id="btnMover" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="btnBuscar" min="-2" pref="147" max="-2" attributes="0"/>
+                  <Component id="btnBuscar" alignment="1" min="-2" pref="147" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -97,7 +94,7 @@
                   </Group>
                   <Component id="jScrollPane1" min="-2" pref="734" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="54" max="32767" attributes="0"/>
+              <EmptySpace pref="58" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -105,23 +102,21 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jDesktopPane1" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="directoryURL" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnVolver" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="321" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="353" max="-2" attributes="0"/>
+                      <EmptySpace pref="51" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
                       <Component id="btnMover" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnMoverDir" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Component id="btnModArchivo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnVerPropiedades" min="-2" max="-2" attributes="0"/>
@@ -135,9 +130,9 @@
                       <Component id="btnExportar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="51" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -273,14 +268,6 @@
         <Property name="text" type="java.lang.String" value="Ruta :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnMover">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Mover Archivo"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoverActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btnModArchivo">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar"/>
@@ -309,6 +296,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Importar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImportarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCopiar">
       <Properties>
@@ -319,6 +309,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Exportar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExportarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnVolver">
       <Properties>
@@ -328,17 +321,17 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVolverActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnMoverDir">
+    <Component class="javax.swing.JButton" name="btnMover">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mover Directorio"/>
+        <Property name="text" type="java.lang.String" value="Mover"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoverDirActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoverActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnBuscar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Buscar Palabra"/>
+        <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
