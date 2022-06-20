@@ -23,6 +23,7 @@ public class Segmento {
         this.setBytesList();
     }
     
+    // Pone los bytes del segmento en default "-"
     public void setBytesList() {
         for (int i = 0 ; i < this.tamanho ; i++){
             Byte b = new Byte();

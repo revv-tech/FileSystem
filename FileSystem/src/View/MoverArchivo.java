@@ -162,14 +162,14 @@ public class MoverArchivo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void FileListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FileListMouseClicked
-        // TODO add your handling code here:
+       
         if (evt.getClickCount() == 2) {
             String nombre = FileList.getSelectedValue();
             String[] parts = nombre.split("\\]");
             if (parts[0].contains("Directorio")) {
                 dirActual = controlador.getDirPorNombre(dirActual.getIdDirectorio(), parts[1]);
                 llenarFileList();
-            } 
+            }
         }
     }//GEN-LAST:event_FileListMouseClicked
 
