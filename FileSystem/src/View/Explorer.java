@@ -615,7 +615,7 @@ public class Explorer extends javax.swing.JFrame {
                 }
                 System.out.println(contenido);
                 String[] parts = file.getName().split("\\.");
-                controlador.crearArchivo(parts[0], parts[1], contenido, dirActual.getIdDirectorio());
+                controlador.crearArchivo(parts[0], "."+parts[1], contenido, dirActual.getIdDirectorio());
 
             } catch (IOException ex) {
                 Logger.getLogger(Explorer.class.getName()).log(Level.SEVERE, null, ex);
